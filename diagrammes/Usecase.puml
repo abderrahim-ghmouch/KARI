@@ -1,0 +1,54 @@
+@startuml KARI
+left to right direction
+
+actor User
+actor Voyageur
+actor Host
+actor Admin
+
+Voyageur --|> User
+Host --|> User
+Admin --|> User
+
+rectangle KARI {
+
+  User --> (Creer un compte)
+
+  User --> (Se connecter)
+
+  User --> (Modifier le profil)
+
+  User --> (Naviguer entre les pages)
+
+  Voyageur --> (Rechercher un logement)
+
+  Voyageur --> (Voir les hosts)
+
+  Voyageur --> (Aimer un host)
+
+  Voyageur --> (Reserver un host)
+
+  Voyageur --> (Annuler une réservation)
+
+  Voyageur --> (Telecharger un reçu PDF)
+
+  Voyageur --> (Ajouter aux favoris)
+
+  Voyageur --> (Supprimer des favoris)
+
+  Host --> (Recevoir notification de réservation)
+
+  Admin --> (Creer un host)
+
+  Admin --> (Modifier un host)
+
+  Admin --> (Supprimer un host)
+
+  Admin --> (Bloquer les doubles réservations)
+
+   Admin --> (Voir nombre total dutilisateurs)
+
+  Admin --> (Voir nombre de réservations)
+}
+
+@endumlg

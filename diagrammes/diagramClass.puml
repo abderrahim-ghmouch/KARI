@@ -1,0 +1,91 @@
+@startuml KARI_Class_Diagram
+skinparam classAttributeIconSize 0
+
+'
+class User {
+  -id : int
+  -nom : String
+  -email : String
+  -password : String
+  -role:string
+  +login()
+  +logout()
+  +updateProfile()
+  +recevoirNotification()
+}
+
+class Voyageur {
+  +rechercherLogement()
+  +reserverLogement()
+  +annulerReservation()
+}
+
+
+class Host {
+    +creerHost()
+  +modifierHost()
+  +supprimerHost()
+}
+
+class Admin {
++activer les compts()
++desactiver lescompts()
+
+}
+
+Voyageur --|> User :inherite
+Host --|> User :inherite
+Admin --|> User :inherite
+
+
+class Logement {
+  -id : int
+  -titre : String
+  -description : String
+  -prixParNuit : float
+  -disponible : boolean
+}
+
+Host "1" -- "0..*" Logement : can make
+
+
+class Reservation {
+  -id : int
+  -dateDebut : Date
+  -dateFin : Date
+  -statut : String
+  +confirmer()
+  +annuler()
+}
+
+Voyageur "1" -- "0..*" Reservation : effectue 
+Logement "1" -- "0..*" Reservation : contain
+
+' 
+class Favori {
+  -id : int
+  +ajouter()
+  +supprimer()
+}
+
+Voyageur "1" -- "0..*" Favori
+Logement "1" -- "0..*" Favori
+
+' 
+class Paiement {
+  -id : int
+  -montant : float
+  -datePaiement : Date
+  -methode : String
+}
+
+Reservation "1" -- "1" Paiement
+
+'
+class RecuPDF {
+  +genererPDF()
+}
+
+Paiement "1" -- "1" RecuPDF
+
+@enduml
