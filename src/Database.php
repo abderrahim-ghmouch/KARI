@@ -24,7 +24,9 @@ class Database
 
             $connection=new PDO($dsn,$this->username,$this->password);
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "connect";
             return $connection;
+        
 
         }catch(PDOException $e)
         {

@@ -51,12 +51,12 @@
         }
         
         .floating {
-            animation: floating 3s ease-in-out infinite;
+            animation: floating 3.0s ease-in-out infinite;
         }
         
         @keyframes floating {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-50px); }
         }
     </style>
 </head>
@@ -95,9 +95,10 @@
                         <p class="text-gray-500">Sign up to explore unique places</p>
                     </div>
 
-                    <form id="registerForm" class="space-y-5">
-                        
-                        <!-- Name Fields -->
+                    <form action="" id="registerForm" class="space-y-5">
+        
+
+                    
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
@@ -111,7 +112,7 @@
                             </div>
                         </div>
 
-                        <!-- Email -->
+                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                             <input type="email" id="email" required
@@ -119,7 +120,7 @@
                                 placeholder="you@example.com">
                         </div>
 
-                        <!-- Password -->
+                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
                             <input type="password" id="password" required
@@ -127,14 +128,14 @@
                             <p class="text-xs text-gray-500 mt-2 ml-1">Minimum 8 characters</p>
                         </div>
 
-                        <!-- Confirm Password -->
+                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
                             <input type="password" id="confirmPassword" required
                                 class="input-modern w-full px-4 py-3.5 bg-orange-50 border-2 border-orange-100 rounded-2xl focus:border-orange-300 focus:bg-white outline-none text-gray-800">
                         </div>
 
-                        <!-- Terms -->
+                    
                         <div class="flex items-start pt-2">
                             <input type="checkbox" id="terms" required 
                                 class="mt-1 w-5 h-5 text-orange-500 border-2 border-gray-300 rounded focus:ring-2 focus:ring-orange-300">
@@ -143,12 +144,12 @@
                             </label>
                         </div>
 
-                        <!-- Submit Button -->
+
                         <button type="submit" class="btn-gradient w-full py-4 rounded-2xl text-white font-semibold text-lg shadow-lg mt-6">
                             Create Account
                         </button>
 
-                        <!-- Divider -->
+                      
                         <div class="relative my-6">
                             <div class="absolute inset-0 flex items-center">
                                 <div class="w-full border-t-2 border-gray-200"></div>
@@ -158,7 +159,7 @@
                             </div>
                         </div>
 
-                        <!-- Social Buttons -->
+                   
                         <div class="grid grid-cols-2 gap-4">
                             <button type="button" class="social-btn flex items-center justify-center py-3.5 bg-white border-2 border-gray-200 rounded-2xl hover:border-orange-300">
                                 <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -179,7 +180,7 @@
 
                     </form>
 
-                    <!-- Sign In Link -->
+                    
                     <p class="text-center text-gray-600 mt-8">
                         Already have an account? 
                         <a href="#" class="text-orange-600 font-semibold hover:underline ml-1">Sign in</a>
