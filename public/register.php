@@ -11,10 +11,11 @@ $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
 $user = new User($name, $lastname, $email, $password_hashed, $role);
 
+header("Location: ../view/login.view.php");
+
 if ($user->register()) {
     
-    header("Location: /public/login.php");
-    exit(); 
+   
 } else {
     echo "Error: Registration failed.";
 }

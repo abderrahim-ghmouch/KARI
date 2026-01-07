@@ -27,12 +27,40 @@ class  User{
         $db= new Database;
         $conn=$db->getconnection();
 
-        $query=("insert into USERS (roles,NAME,lastname,email,passwd) VALUES (?,?,?,?,?)");
+        $query=("insert into USERS (roles,name,lastname,email,passwd) VALUES (?,?,?,?,?)");
         $stmt=$conn->prepare($query);
 
         return $stmt->execute( [ $this->role,$this->name,$this->lastname,$this->email,$this->password_hash]);}
 
-}
+     public function login($email, $password) {
+        $db = new Database();
+        $conn = $db->getconnection();
+
+        $query = "SELECT * FROM USERS WHERE email = ?";
+        $stmt = $conn->prepare($query);
+        
+
+        $stmt->execute([$email]);
+    
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        if (password_verify($password, $user['passwd'])) {
+         
+            return $user;
+        } else {
+        
+            return false;
+        }
+    }
+
+
+
+
+
+        }
+
+
 
     
 
