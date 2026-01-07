@@ -36,11 +36,11 @@ class  User{
         $db = new Database();
         $conn = $db->getconnection();
 
-        $query = "SELECT * FROM USERS WHERE email = ?";
+        $query = "SELECT * FROM USERS WHERE email =:email";
         $stmt = $conn->prepare($query);
         
 
-        $stmt->execute([$email]);
+        $stmt->execute([":email"=>$email]);
     
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -56,9 +56,20 @@ class  User{
 
 
 
+public function updateProfile( $name,$lastnmae,$email,$id){
+    
+    $db = new Database();
+   $conn = $db->getconnection();
+    $query="update Users SET name = :name ,lastname :lastname , email= :email where ID =:id";
+$stmt = $conn->prepare($query);
+    $stmt->execute([
+        ':name'     => $name,
+        ':email'    => $email,
+        ':id'       => $id
+    ]);
+}
 
-
-        }
+}
 
 
 

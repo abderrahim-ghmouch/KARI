@@ -1,3 +1,19 @@
+<?php
+include  "../public/User.php";
+session_start();
+
+if(isset($_SESSION['user_id']))
+    {
+
+    $user_Id=$_SESSION['user_id'];
+
+}else{
+
+    header("location: ./login.view.php");
+}
+
+
+?>
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
@@ -100,7 +116,7 @@
             </div>
             <div class="flex gap-3 items-center">
                 <span class="text-sm font-medium text-slate-600 dark:text-slate-400 self-center hidden sm:block">Don't have an account?</span>
-                <a href="/signup"
+                <a href="../view/register.view.php"
                     class="group relative overflow-hidden rounded-xl px-6 py-2.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold transition-all hover:shadow-lg border border-slate-200 dark:border-slate-700">
                     <span class="relative z-10">Sign Up</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -120,7 +136,7 @@
                 
         
                 <div class="glass-effect rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-                    <form action="../public/login.php" class="flex flex-col gap-5" method="POST">
+                    <form action="./../public/login.php" class="flex flex-col gap-5" method="POST">
                         <label class="flex flex-col gap-2.5 group">
                             <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold flex items-center gap-2">
                                 <span class="material-symbols-outlined text-primary text-lg">email</span>
