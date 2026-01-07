@@ -1,5 +1,2 @@
 
-
-SHOW tables;
-
-        
+select *from USERS;
