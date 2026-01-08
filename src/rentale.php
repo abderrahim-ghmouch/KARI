@@ -17,6 +17,15 @@ class rentale
     private $city;
 
     private $price_per_night;
+    
+    private $capacity;
+
+    private $imageurl;
+    
+    private $startdate;
+
+    private $endDate;
+
 
     public function getId(){
         return $this->id;
@@ -35,8 +44,16 @@ class rentale
         return $this->description;
 
     }
+
     public function getDate(){
         $this->date;
+    }
+
+    public function getCapacity(): void
+    {
+
+
+
     }
 
 
@@ -88,5 +105,21 @@ public function setCity($city){
 
 public function  setPrice($price){
 $this->price_per_night=$price; }
+
+public function addRentale(){
+
+$query="Insert into ";
+
+
+
+
+}
+public function updateRentale(){
+
+}
+
+public function deletRental(){
+
+}
 }
 
