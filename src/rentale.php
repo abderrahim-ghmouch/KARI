@@ -1,125 +1,144 @@
 <?php
 
-class rentale
+include __DIR__ . "/./Database.php";
+class Rental
 {
-
-    private $id;
-    private $host_id;
-
+    private $id ;
+    private $hostId;
     private $title;
-
     private $description;
-
-    private $date;
-
     private $address;
-
     private $city;
+    private $pricePerNight;
 
-    private $price_per_night;
-    
-    private $capacity;
-
-    private $imageurl;
-    
-    private $startdate;
-
-    private $endDate;
+    private $image;
 
 
-    public function getId(){
+
+    public function __construct(
+        $hostId = "",
+        $title = "",
+        $description = "",
+        $address = "",
+        $city = "",
+        $pricePerNight = "",
+        $image = "",
+        
+    ) {
+        $this->hostId = $hostId;
+        $this->title = $title;
+        $this->description = $description;
+        $this->address = $address;
+        $this->city = $city;
+        $this->pricePerNight = $pricePerNight;
+        $this->image = $image;
+    }
+
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function gethost_id(){
-        return $this->host_id;
+    public function getHostId()
+    {
+        return $this->hostId;
     }
 
-    public function getTitle(){
-
+    public function getTitle()
+    {
         return $this->title;
     }
+
     public function getDescription()
     {
         return $this->description;
-
     }
 
-    public function getDate(){
-        $this->date;
-    }
 
-    public function getCapacity(): void
+   
+
+    
+
+    public function getAddress()
     {
-
-
-
-    }
-
-
-    public function getAdress(){
         return $this->address;
     }
 
-    public function getCity(){
-
-        $this->city;
-    }
-    public function getPrice(){
-
-        $this->price_per_night;
+    public function getCity()
+    {
+        return $this->city;
     }
 
-    public function setId($id){
+    public function getPrice()
+    {
+        return $this->pricePerNight;
+    }
 
-        $this->id=$id;
+    public function getImage()
+    {
+        return $this->image;
+    }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setHostId($hostId)
+    {
+        $this->hostId = $hostId;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+   
+
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    public function setPrice($price)
+    {
+        $this->pricePerNight = $price;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
     
-public function sethost_id($host_id){
+   
+
+    public function createRentale(){
+            $db=new Database();
+            $conn=$db->getconnection();
+        
+
+        $query="insert into Rentale (title,rental_description,adress,city,pricepernight,capacity,image_name)";
+        $stmt=$conn->prepare($query);
+        $stmt->execute([$this->gettitle(),$this->getDescription(),$this->getAddress(),$this->getCity(),$this->getPrice(),$this->getImage()]);
+    }
+    public function upsateRentale(){
 
 
-    $this->host_id=$host_id;
+        $db=new Database();
+        $conn=$db->getconnection();
 
+    }
+
+    
 }
-
-public function setTitle($title){
-   $this->$title=$title;
-}
-
-public function setDescription($description)
-{
-$this->description=$description;
-}
-
-public function setDate($date){
-$this->date=$date;
-}
-
-public function setAdress($address){
-    $this->address=$address;
-}
-public function setCity($city){
-    $this->city=$city;
-}
-
-public function  setPrice($price){
-$this->price_per_night=$price; }
-
-public function addRentale(){
-
-$query="Insert into ";
-
-
-
-
-}
-public function updateRentale(){
-
-}
-
-public function deletRental(){
-
-}
-}
-

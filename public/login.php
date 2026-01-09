@@ -15,5 +15,5 @@ if ($loggedInUser) {
     $_SESSION['role'] = $loggedInUser['roles'];
     header("location: ./../view/profile.view.php");
 } else {
-    echo "Wrong email or password";
+   header("location: ./../view/login.view.php"); ;
 }

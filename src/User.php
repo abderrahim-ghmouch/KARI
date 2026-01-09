@@ -56,18 +56,25 @@ class  User{
 
 
 
-public function updateProfile( $name,$lastnmae,$email,$id){
-    
-    $db = new Database();
-   $conn = $db->getconnection();
-    $query="update Users SET name = :name ,lastname :lastname , email= :email where ID =:id";
-$stmt = $conn->prepare($query);
-    $stmt->execute([
-        ':name'     => $name,
-        ':email'    => $email,
-        ':id'       => $id
-    ]);
-}
+public function updatProfile( $id, $firstname, $lastname, $email) {
+        try {
+            $db = new Database();
+            $pdo = $db->getconnection();
+            $sql = "UPDATE USERS SET name = :name, lastname = :lastname, email = :email WHERE ID = :id";
+            $stmt = $pdo->prepare($sql);
+            
+            return $stmt->execute([
+                ':name'     => $firstname,
+                ':lastname' => $lastname,
+                ':email'    => $email,
+                ':id'       => $id
+            ]);
+        } catch (PDOException $e) {
+           
+            return false;
+        }
+    }
+
 
 }
 

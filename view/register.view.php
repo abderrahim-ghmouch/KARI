@@ -6,11 +6,9 @@ if(isset($_SESSION['user_id']))
     {
 
     $user_Id=$_SESSION['user_id'];
-    header("location: ./profile.view.php");
+    header(header: "location: ./profile.view.php");
 
 }
-
-
 ?>
 
 <!DOCTYPE html>
