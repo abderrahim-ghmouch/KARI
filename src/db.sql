@@ -19,8 +19,8 @@ pricepernight int,
 
 capacity varchar(50),
 
+
 image_name varchar(255),
 
 
 )
-

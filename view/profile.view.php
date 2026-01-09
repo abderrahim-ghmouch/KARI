@@ -8,7 +8,6 @@ if(isset($_SESSION['user_id'])) {
     $user_Id=$_SESSION['user_id'];
 } else {
     header("location: ./login.view.php");
-    exit();
 }
 
 $conn=new Database;
@@ -18,6 +17,7 @@ $pdo=$conn->getconnection();
 $stmt = $pdo->prepare("SELECT * FROM USERS where ID = :id");
 $stmt->execute([':id' => $user_Id]);
 $row=$stmt->fetch();
+
 ?>
 <!DOCTYPE html>
 <html class="light" lang="en">
@@ -57,8 +57,9 @@ $row=$stmt->fetch();
     </style>
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-900 font-display text-slate-900 dark:text-white antialiased animate-gradient">
-    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-       
+
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+
         <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-10 py-5 glass-effect">
             <div class="flex items-center gap-3">
                 <div class="size-10 text-primary transform hover:scale-110 transition-transform duration-300">
@@ -71,9 +72,14 @@ $row=$stmt->fetch();
             <div class="flex gap-3 items-center">
                 <button class="p-2 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all"><span class="material-symbols-outlined text-slate-700 dark:text-slate-200">notifications</span></button>
                 <button class="p-2 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all"><span class="material-symbols-outlined text-slate-700 dark:text-slate-200">settings</span></button>
-                <form href="logout.php" class="p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 group transition-all" title="Logout">
-                    <input type hidden  <> class="material-symbols-outlined text-slate-700 dark:text-slate-200 group-hover:text-red-600 dark:group-hover:text-red-400">logout>
-                </form>
+                <form method="POST" action="./../public/login.php"class="effect rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+             <form class="p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 group transition-all" title="Logout">
+    <button type="submit" class="flex items-center justify-center w-full h-full">
+        <span class="material-symbols-outlined text-slate-700 dark:text-slate-200 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+            logout
+        </span>
+    </button>
+</form>
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold cursor-pointer hover:scale-110 transition-transform">JD</div>
             </div>
         </header>
@@ -86,7 +92,7 @@ $row=$stmt->fetch();
                     <div class="relative flex flex-col sm:flex-row gap-6 items-start sm:items-center">
                         <div class="relative group">
                             <div class="w-28 h-28 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-                                <?= strtoupper(substr($row["name"], 0, 1) . substr($row["lastname"], 0, 1)) ?>
+                        <?= strtoupper(substr($row["name"], 0, 1) . substr($row["lastname"], 0, 1)) ?>
                             </div>
                         </div>
                         <div class="flex-1 w-full">
@@ -102,10 +108,11 @@ $row=$stmt->fetch();
                                     <button onclick="openRentalModal()" class="group relative overflow-hidden rounded-xl px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
                                         <span class="relative z-10 flex items-center gap-2">
                                             <span class="material-symbols-outlined text-xl">add_home</span>
-                                            Add Rental
+                                        
+                                                Add Rental
                                         </span>
                                     </button>
-                                    
+
                                     <button class="group relative overflow-hidden rounded-xl px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
                                         <span class="relative z-10 flex items-center gap-2">
                                             <span class="material-symbols-outlined text-xl">edit</span>

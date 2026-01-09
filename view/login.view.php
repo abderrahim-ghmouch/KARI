@@ -1,14 +1,7 @@
 <?php
+
 include  "../public/User.php";
 session_start();
-
-if(isset($_SESSION['user_id']))
-    {
-
-    $user_Id=$_SESSION['user_id'];
-    header("location: ./login.view.php");
-
-}
 
 
 ?>

@@ -14,7 +14,6 @@ class Rental
     private $image;
 
 
-
     public function __construct(
         $hostId = "",
         $title = "",
