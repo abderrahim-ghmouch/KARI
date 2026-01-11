@@ -3,5 +3,5 @@ session_start();
 
 session_destroy();
 
-header("location: /../views/login.view");
+header("location: ../../view/login.view.php");
 

@@ -20,4 +20,3 @@ if ($user->register()) {
 } else {
     echo "Error: Registration failed.";
 }
-?>

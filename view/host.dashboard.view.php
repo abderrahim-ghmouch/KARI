@@ -89,13 +89,11 @@ $rentals = $rental->getByHostId($user_Id);
                     href="#">Dashboard</a>
                 <a class="text-[#E3CAA5]/80 text-sm font-medium leading-normal hover:text-white transition-colors"
                     href="#">Inbox</a>
-                <a class="text-[#E3CAA5]/80 text-sm font-medium leading-normal hover:text-white transition-colors"
-                    href="#">Calendar</a>
             </nav>
         </div>
 
         <div class="flex items-center gap-4">
-            <form action="../public/logout.php" method="POST">
+            <form action="../controllers/logout.php" method="POST">
                 <button type="submit"
                     class="flex items-center gap-2 bg-[#8c6b53] hover:bg-[#5C4033] text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm">
                     <span class="material-symbols-outlined text-[18px]">logout</span>

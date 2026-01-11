@@ -13,11 +13,11 @@ if ($loggedInUser) {
     $_SESSION['user_id'] = $loggedInUser['ID'];
     $_SESSION['role'] = $loggedInUser['roles']; 
     if($loggedInUser['roles']=='traveler'){
-        header("location: ./../view/profile.view.php");
+            header("location: ./../view/home.view.php");
     }if($loggedInUser['roles']=='host'){
 
     header("location: ./../view/host.dashboard.view.php");
-  }
+}
 
 } else{
     header("location: ./../view/login.view.php"); 
