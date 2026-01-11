@@ -30,6 +30,7 @@ class Rental
         $this->image = $image;
     }
 
+
     public function getId()
     {
         return $this->id;
@@ -128,5 +129,24 @@ class Rental
 
     }
 
+    public function creat($title,$description,$addrees,$city,$price,$imageName,$host_id){
+
+
+$db = new Database();
+
+$conn = $db->getconnection();
+
+$query="insert into Rental (title,rental_description,addrees,city,pricepernight,image_name,host_id) value (:title,:rental_description,:addrees,:city,:pricepernight,:image_name,:host_id);";
+
+$stmt=$conn->prepare($query);
+
+$stmt->execute([
+    "title"=> $title,"rental_description"=>$description,"addrees"=>$addrees,"city"=>$city,"pricepernight"=>$price,"image_name"=>$imageName,"host_id"=>$host_id
+]);
+
+header("location: /view/host.dashboard.view.php");
+exit();
+    
+    }
     
 }
