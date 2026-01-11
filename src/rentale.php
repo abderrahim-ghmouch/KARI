@@ -1,6 +1,5 @@
 <?php
 
-include __DIR__ . "/Database.php";
 class Rental
 {
     private $id;
@@ -296,6 +295,34 @@ class Rental
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }
+    }
+
+    public function getReviewCount()
+    {
+        $db = new Database();
+        $conn = $db->getconnection();
+
+        $query = "SELECT COUNT(*) as review_count FROM reviews WHERE rental_id = :rental_id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([":rental_id" => $this->id]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result['review_count'];
+    }
+
+    public function getAverageRating()
+    {
+        $db = new Database();
+        $conn = $db->getconnection();
+
+        $query = "SELECT AVG(rating) as average_rating FROM reviews WHERE rental_id = :rental_id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([":rental_id" => $this->id]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return round($result['average_rating'], 2);
     }
 
 }

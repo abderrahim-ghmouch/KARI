@@ -7,6 +7,8 @@ if (isset($_SESSION['user_id'])) {
     exit();
 }
 
+
+include __DIR__ . "/../src/Database.php";
 include __DIR__ . "/../src/rentale.php";
 
 $rental = new Rental();

@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+include __DIR__ . "/../src/Database.php";
 require "../src/User.php";
 
 $email=$_POST["email"];

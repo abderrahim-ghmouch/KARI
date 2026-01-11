@@ -14,6 +14,27 @@ class Reservation
 
     private $total_price;
 
+    private $status;
+
+    public function __construct(
+        $id="",
+        $rental_id="",
+        $user_id="",
+        $start_date="",
+        $end_date="",
+        $total_price="",
+        $status=""
+
+    ) {
+        $this->id=$id;
+        $this->rental_id = $rental_id;
+        $this->user_id = $user_id;
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
+        $this->total_price = $total_price;
+        $this->status = $status;
+    }
+
     public function getId(){
 
         return $this->id;
@@ -47,29 +68,17 @@ class Reservation
         return $this->total_price;
     }
 
-    public function __construct(
-        $id="",
-        $rental_id="",
-        $user_id="",
-        $start_date="",
-        $end_date="",
-        $total_price=""
+    public function getstatus(){
 
-    ) {
-        $this->id=$id;
-        $this->rental_id = $rental_id;
-        $this->user_id = $user_id;
-        $this->start_date = $start_date;
-        $this->end_date = $end_date;
-        $this->total_price = $total_price;
+        return $this->status;
     }
 
     public function reserve(){
         $db = new Database();
         $conn = $db->getconnection();
 
-        $query = "INSERT INTO RESERVATION (rental_id, user_id, date_debut, date_fin, total_price) 
-                VALUES (:rental_id, :user_id, :start_date, :end_date, :total_price)";
+        $query = "INSERT INTO RESERVATION (rental_id, user_id, date_debut, date_fin, total_price, status) 
+                VALUES (:rental_id, :user_id, :start_date, :end_date, :total_price, 'confirmed')";
 
         $stmt = $conn->prepare($query);
         $stmt->execute([
@@ -95,17 +104,27 @@ class Reservation
 
         foreach ($data as $row) {
             $reservation = new Reservation(
-                $row['reservation_id'],
+                $row['ID_RESERVATION'],
                 $row['rental_id'],
                 $row['user_id'],
-                $row['date_debut'],
-                $row['date_fin'],
-                $row['total_price']
+                $row['DATE_DEBUT'],
+                $row['DATE_FIN'],
+                $row['total_price'],
+                $row['status']
             );
             $reservations[] = $reservation;
         }
         
         return $reservations;
+    }
+
+    public function cancelreservation($reservation_id){
+        $db = new Database();
+        $conn = $db->getconnection();
+
+        $query = "UPDATE RESERVATION SET status = 'canceled' WHERE ID_RESERVATION = :reservation_id";
+        $stmt = $conn->prepare($query);
+        return $stmt->execute([":reservation_id" => $reservation_id]);
     }
 
 }

@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . "/Database.php";
 class User
 {
     private $Id;
@@ -14,7 +13,7 @@ class User
 
     private $role;
 
-    public function __construct($name, $lastname, $email, $password_hash, $role)
+    public function __construct($name = "", $lastname = "", $email = "", $password_hash = "", $role = "")
     {
 
         $this->name = $name;
@@ -106,8 +105,6 @@ class User
             return false;
         }
     }
-
-
 }
 
 

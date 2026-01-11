@@ -1,6 +1,7 @@
 <?php
-
 session_start();
+
+include __DIR__ . "/../src/Database.php";
 
 include __DIR__ . "/../src/rentale.php";
 

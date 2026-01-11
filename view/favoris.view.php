@@ -1,3 +1,17 @@
+<?php 
+
+session_start();
+
+include __DIR__ . "/../src/Database.php";
+include __DIR__ . "/../src/rentale.php";
+include __DIR__ . "/../src/favorite.php";
+
+$favorite = new Favorite();
+
+$favorites = $favorite->getAllFavoritesByUser($_SESSION['user_id']);
+
+?>
+
 <!DOCTYPE html>
 
 <html class="light" lang="en">
@@ -146,191 +160,46 @@
                     </div>
                     <!-- Image Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                        <!-- Card 1 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Modern house with beach view"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCD0TttucWWWb_lPIZcortCmgxxnp56xFv2omCwdr8T8AUZ6T-70A_aytqcMR7dwVd2NWrjMQ9YldtLm7XjkmfG3hp7AW11DiqJUbP14JBHCHRWNUBipgQCF1dI7uLbkjvrVrngH61StgqYR6btWlBm9Sc-vEYLxWJYVRipSDWxrJzmfKwepaZ6d7mBeYYupvf25pbIjju1ik_HCnQonES6cPt3nSw1PZQY2awQ9mIjOBSRhTKAd_hQslMmzZYXYh4nixlTm3s4TqWL");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Coastal Retreat in
-                                        Malibu</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">4.9</span>
+                        <?php foreach ($favorites as $favorite): 
+                            $rental = new Rental();
+                            $rental = $rental->getById($favorite->getRentalId());
+                        ?>
+                            <div class="flex flex-col gap-3 group cursor-pointer">
+                                <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
+                                    data-alt="Modern house with beach view"
+                                    style='background-image: url("/images/<?= $rental->getImage() ?>");'>
+                                    <div
+                                        class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
+                                        <?php 
+                                            $isFavorited = $favorite->isFavorite($_SESSION['user_id'], $rental->getId());
+                                        ?>
+                                        <?php if($isFavorited): ?>
+                                            <form action="../controllers/remove_favorite.php" method="post">
+                                                <input type="hidden" name="rental_id" value="<?= $rental->getId() ?>">
+                                                <button type="submit" class="material-symbols-outlined text-red-500/70 hover:text-red-500 text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
+                                            </form>
+                                        <?php else: ?>
+                                            <form action="../controllers/add_favorite.php" method="post">
+                                                <input type="hidden" name="rental_id" value="<?= $rental->getId() ?>">
+                                                <button type="submit" class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Malibu, California</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$350 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Cozy wooden cabin in snowy mountains"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAs3jPzYBSLluPp3q7NguYNbLVRLs_R-_x9xnlf_a58D80G5GfY7YNocDzijGJZPXoV7kdLWfs6qqa_de6pT0_2T9W6_GgnqjriXoF9d5Wp_B_mWxLDs1mv6-tO9u50Zgg9kmTfBubMhpEPxgAvknyrRLrkweUoeaUNShOesuLeIy7pmZIpwaUgUDF7fWnRuvf3Kl8LB2ULBhOqBBo7_WLyx-QYl8g7C8_Rv23fuipiCCB8VGbFjEZz59xVSj90Ghrwl7nmTtnbAXkq");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Mountain Escape</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">4.8</span>
+                                <div class="px-1">
+                                    <div class="flex justify-between items-start">
+                                        <p class="text-[#151413] text-base font-bold leading-normal"><?= $rental->getTitle() ?></p>
+                                        <div class="flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-sm fill-primary">star</span>
+                                            <span class="text-sm font-medium">4.9</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Aspen, Colorado</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$420 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Desert modern villa in Joshua Tree"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsVdWg7r5Zvb4UeYN0OhJ5rsF33U66ym4i-2iDjzweHLKbLsGM71l7UeQ4BIztgz5VyvEPYBuPUOxkDAPB3ml2rpQT7xrPQy7cg3tI0UkfBOhVqSa8gyWdA8rYKhpZ4Jcr838yYi3c6fDzZaqGxZ_QMbDwDR1xVUj7CU0bpGjDa5b_8da-V347qmtmPF7y7pyQoIZwoCvorS32H0GhfOlZriEHoJapTPR_QvIVtymUns0p7jBYrmTcPAGyfk-6OiSpRfy0Tj_j5-MF");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
+                                    <p class="text-[#7b746f] text-sm font-normal leading-normal"><?= $rental->getCity() ?>, <?= $rental->getAddress() ?></p>
+                                    <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$<?= $rental->getPrice() ?> <span
+                                            class="font-normal text-[#7b746f]">/ night</span></p>
                                 </div>
                             </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Desert Oasis</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">5.0</span>
-                                    </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Joshua Tree, California</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$280 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 4 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Modern penthouse interior"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_obAjXZqAa4ozciWbrYd1KmVI7yO8PovijBxPNuegRpmQAeANMR_J0trABN20wb8goOi0m1A-kI2ZJAfyhj8PZoyMPHC9FuQSSwuovXBZ-eQAvMv5kduNkoLUGjG0G-oozfuePiMl5eY9nVV3phIXZP9FmFp--1_HK6HcCNViXxIRFgrJKZgEVS2Q2jIhDfOS96KtfIhk4YREFSSVyQ2I1qyPl-STxzaNEw-FyaC1xUJoBaT4o4ytA0q5ML_mPw6tAOhVAC5WbOEB");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Urban Loft</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">4.7</span>
-                                    </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">New York, New York</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$210 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 5 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Rustic cabin by the lake"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA07XSpoNG_H3-RQ1T1h92xBCmZA9inotPCDqqsRxlLO69NAsBSRVInfSkI6y04G1svYRd8dgA2ehMqzHO0gLkEyWUJPNAo-N621iloly164vuLmbnUfbH7LmnW2IupdiFtKm-HDuFozYjv98RK7V31EQFJFs1MxZr0wQ54nDrzzeZe0XpV5lH30uaApOeMQOGMoFgAUopfeKMJea-nUtFlMPf3PRln1DpIvfwX9DzMRhuJ3t1lORXgQxhS467Mg_X3QYmTcF7mz42s");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Lakeside Cabin</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">4.9</span>
-                                    </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Lake Tahoe, California</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$195 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 6 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Luxurious villa with pool"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxHjkXK7Q9Qw2estZ-PCi1jaTQMREKWUpwDqKZZ9e3vin0NCmukZ-gfIOlauEsBiEoyJnNfGGDnnzei3V4hF9argsTEimr0a8JAl905F9RmWGX0Fuh4tGbRt_p_-9UP1_C5I6pEMGaApwGIQolljjsiazCzN-evHxBkH4E_6xlMH4MuLSwVypdqMDeVoVO02XsyUl94EDvlaZAJJ96uiIYQjSCcBuTs_1VYG_Xmx6-9uwa5QkpFtOL7z5IFEdpEV2M5_ctdRqaij2D");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Modern Villa</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">5.0</span>
-                                    </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Miami, Florida</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$550 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 7 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Traditional Japanese house"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXenKoFqx1s_Qiyc2IcCCj9sBGygY2m9smDSX5vvVzikOx4PCmFa4b05vefVnh954FdAL96qaUKr6Uv6I2GMLwE-86-boIiiydPVyfaA8px0HblSUwGN2t42o0plAMoB-0M279lETS13Fmbi7idQFLkx6UKceoWTQeH4Ou04fN6W2msVfHAmgAPsHCejenrcF1ylSXJWgvO2D6psWcTbfJC5sh29qvf24SpPYLA3wYlYCToI69lowJaSqHcDU9EEvjOAmwpk8KMXvo");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Kyoto Zen Stay</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">4.9</span>
-                                    </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Kyoto, Japan</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$220 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
-                        <!-- Card 8 -->
-                        <div class="flex flex-col gap-3 group cursor-pointer">
-                            <div class="relative w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl shadow-sm overflow-hidden"
-                                data-alt="Nordic style minimalist cabin"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB8ecMDyRaWNjBrSSXYwwRVSl7AFf_1kNG4VXBi7iYNugGnmg-YB92EfnVuEjPcixQSX98A2b6n3w8emZmQBQ0X5RGiA2pUSjVxgjZXtdBKNdGfAu4_na4etrE97Mr0iAD6D74UcPXGtew_AJySkJRh2bGWqzyqmUe2lDc-YwMWA_nUBeato2Z5eNXGTEsdmvZLFMGT6jYxdGL_icxOQdnqoX_v35s5a7NXYYPmcIWSkcBtaeo30aSxbKHy-BBGW871AE0UM_9XaFzt");'>
-                                <div
-                                    class="absolute top-3 right-3 bg-white/30 backdrop-blur-md rounded-full p-2 flex items-center justify-center">
-                                    <span class="material-symbols-outlined fill-primary text-2xl">favorite</span>
-                                </div>
-                            </div>
-                            <div class="px-1">
-                                <div class="flex justify-between items-start">
-                                    <p class="text-[#151413] text-base font-bold leading-normal">Nordic Hideaway</p>
-                                    <div class="flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm fill-primary">star</span>
-                                        <span class="text-sm font-medium">4.8</span>
-                                    </div>
-                                </div>
-                                <p class="text-[#7b746f] text-sm font-normal leading-normal">Oslo, Norway</p>
-                                <p class="text-[#151413] text-sm font-bold leading-normal mt-1">$310 <span
-                                        class="font-normal text-[#7b746f]">/ night</span></p>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                     <!-- Pagination -->
                     <div class="flex items-center justify-center py-12 gap-2">

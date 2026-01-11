@@ -1,7 +1,9 @@
 <?php
 session_start();
 
+include __DIR__ . "/../src/Database.php";
 include __DIR__ . "/../src/rentale.php";
+include __DIR__ . "/../src/favorite.php";
 
 $rental = new Rental();
 $rentals = $rental->getAll();
@@ -151,10 +153,26 @@ $rentals = $rental->getAll();
                         <a class="flex flex-col gap-3 group cursor-pointer relative" href="/view/details.view.php?rental_id=<?= $rental->getId() ?>">
                             <div
                                 class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                                <div class="absolute top-3 right-3 z-10">
-                                    <span
-                                        class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                                </div>
+                                <?php if(isset($_SESSION["user_id"])): ?>
+                                    <div class="absolute top-3 right-3 z-10">
+                                        <?php 
+                                            $favorite = new Favorite();
+
+                                            $isFavorited = $favorite->isFavorite($_SESSION['user_id'], $rental->getId());
+                                        ?>
+                                        <?php if($isFavorited): ?>
+                                            <form action="../controllers/remove_favorite.php" method="post">
+                                                <input type="hidden" name="rental_id" value="<?= $rental->getId() ?>">
+                                                <button type="submit" class="material-symbols-outlined text-red-500/70 hover:text-red-500 text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
+                                            </form>
+                                        <?php else: ?>
+                                            <form action="../controllers/add_favorite.php" method="post">
+                                                <input type="hidden" name="rental_id" value="<?= $rental->getId() ?>">
+                                                <button type="submit" class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
                         
                                 <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
                                     data-alt="Modern downtown loft apartment interior with large windows"

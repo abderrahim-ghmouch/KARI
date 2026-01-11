@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include __DIR__ . "/Database.php";
+include __DIR__ . "/../src/Database.php";
 include __DIR__ . "/../src/reservation.php";
 include __DIR__ . "/../src/rentale.php";
 
@@ -150,7 +150,7 @@ $reservations = $reservation->getallresrvation($_SESSION['user_id']);
                                         <div class="flex items-center gap-2">
                                             <span
                                                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary text-white">
-                                                Confirmed
+                                                <?= $reservation->getstatus() ?>
                                             </span>
 
                                             <span class="text-[#7b746f] text-xs font-medium">Reservation #KA-29482</span>
@@ -163,21 +163,22 @@ $reservations = $reservation->getallresrvation($_SESSION['user_id']);
                                         </div>
                                         <div class="flex items-center gap-1 text-primary font-semibold text-sm mt-1">
                                             <span class="material-symbols-outlined text-base">calendar_today</span>
-                                            <p>Oct 12 – Oct 15, 2023</p>
+                                            <p><?=  $reservation->getStart_date() ?> – <?=  $reservation->getend_date() ?></p>
                                         </div>
                                     </div>
                                     
                                 </div>
                                 <div
                                     class="flex flex-col justify-center gap-3 md:border-l md:border-black/5 md:pl-6 min-w-[180px]">
-                                    <button
-                                        class="flex items-center justify-center rounded-lg h-10 px-4 bg-background-light text-[#151413] text-sm font-bold hover:bg-kari-earth/20 transition-all w-full">
-                                        <span class="truncate">View Receipt</span>
-                                    </button>
-                                    <button
-                                        class="flex items-center justify-center rounded-lg h-10 px-4 bg-transparent text-[#7b746f] hover:text-red-600 hover:bg-red-50 text-sm font-bold transition-all w-full">
-                                        <span class="truncate">Cancel Reservation</span>
-                                    </button>
+                                    <?php if($reservation->getstatus() !== "canceled"): ?>
+                                        <form action="../controllers/cancel_reservation.php" method="post">
+                                            <input type="hidden" name="id" value="<?= $reservation->getId() ?>">
+                                            <button type="submit"
+                                                class="flex items-center justify-center rounded-lg h-10 px-4 bg-transparent text-[#7b746f] hover:text-red-600 hover:bg-red-50 text-sm font-bold transition-all w-full">
+                                                <span class="truncate">Cancel Reservation</span>
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php endforeach;?>

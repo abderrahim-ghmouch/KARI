@@ -24,5 +24,5 @@ image_name varchar(255)
 );
 
 
-select * from RESERVATION;
+select * from USERS;
 
