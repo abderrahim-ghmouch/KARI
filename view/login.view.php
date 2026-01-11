@@ -1,8 +1,6 @@
 <?php
 
-include  "../public/User.php";
-session_start();
-
+include  "../controllers/User.php";
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +91,7 @@ session_start();
 </head>
 <body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-900 font-display text-slate-900 dark:text-white antialiased animate-gradient">
     <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-       
+
         <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-10 py-5 glass-effect">
             <div class="flex items-center gap-3">
                 <div class="size-10 text-primary transform hover:scale-110 transition-transform duration-300">
@@ -107,12 +105,12 @@ session_start();
             </div>
             <div class="flex gap-3 items-center">
                 <span class="text-sm font-medium text-slate-600 dark:text-slate-400 self-center hidden sm:block">Don't have an account?</span>
-                <a href="../view/register.view.php"
+                <a href="./register.view.php"
                     class="group relative overflow-hidden rounded-xl px-6 py-2.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold transition-all hover:shadow-lg border border-slate-200 dark:border-slate-700">
                     <span class="relative z-10">Sign Up</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </a>
-            </div>
+            </div>   
         </header>
 
         <main class="flex-1 flex justify-center items-center pt-20 pb-16 px-4 sm:px-6">
@@ -127,7 +125,7 @@ session_start();
                 
         
                 <div class="glass-effect rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
-                    <form action="./../public/login.php" class="flex flex-col gap-5" method="POST">
+                    <form action="./../controllers/login.php" class="flex flex-col gap-5" method="POST">
                         <label class="flex flex-col gap-2.5 group">
                             <span class="text-slate-700 dark:text-slate-200 text-sm font-semibold flex items-center gap-2">
                                 <span class="material-symbols-outlined text-primary text-lg">email</span>

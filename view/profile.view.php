@@ -6,13 +6,15 @@ session_start();
 
 if(isset($_SESSION['user_id'])) {
     $user_Id=$_SESSION['user_id'];
+   
 } else {
     header("location: ./login.view.php");
 }
 
-$conn=new Database;
-$user = new User(null,null,null,null,null);
-$pdo=$conn->getconnection();
+
+$db=new Database;
+$user = new User (null,null,null,null,null);
+$pdo=$db->getconnection();
 
 $stmt = $pdo->prepare("SELECT * FROM USERS where ID = :id");
 $stmt->execute([':id' => $user_Id]);
@@ -72,7 +74,7 @@ $row=$stmt->fetch();
             <div class="flex gap-3 items-center">
                 <button class="p-2 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all"><span class="material-symbols-outlined text-slate-700 dark:text-slate-200">notifications</span></button>
                 <button class="p-2 rounded-xl hover:bg-white/50 dark:hover:bg-slate-800/50 transition-all"><span class="material-symbols-outlined text-slate-700 dark:text-slate-200">settings</span></button>
-                <form method="POST" action="./../public/login.php"class="effect rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+                <form method="POST" action="./../controllers/login.php"class="effect rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
              <form class="p-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 group transition-all" title="Logout">
     <button type="submit" class="flex items-center justify-center w-full h-full">
         <span class="material-symbols-outlined text-slate-700 dark:text-slate-200 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
@@ -200,7 +202,7 @@ $row=$stmt->fetch();
                         </button>
                     </div>
 
-                    <form action="/../public/add_rental.php" method="POST" enctype="multipart/form-data" class="px-4 py-6 sm:p-6">
+                    <form action="/../controllers/add_rental.php" method="POST" enctype="multipart/form-data" class="px-4 py-6 sm:p-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             
                             <div class="md:col-span-2">

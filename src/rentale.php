@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . "/./Database.php";
+include __DIR__ . "/Database.php";
 class Rental
 {
     private $id ;
@@ -10,10 +10,7 @@ class Rental
     private $address;
     private $city;
     private $pricePerNight;
-
     private $image;
-
-
     public function __construct(
         $hostId = "",
         $title = "",
@@ -52,11 +49,6 @@ class Rental
     {
         return $this->description;
     }
-
-
-   
-
-    
 
     public function getAddress()
     {
@@ -114,20 +106,17 @@ class Rental
     {
         $this->pricePerNight = $price;
     }
-
     public function setImage($image)
     {
         $this->image = $image;
     }
     
-   
-
     public function createRentale(){
+    
             $db=new Database();
             $conn=$db->getconnection();
-        
 
-        $query="insert into Rentale (title,rental_description,adress,city,pricepernight,capacity,image_name)";
+        $query="insert into Rental (title,address,city,pricepernight,capacity,image_name)";
         $stmt=$conn->prepare($query);
         $stmt->execute([$this->gettitle(),$this->getDescription(),$this->getAddress(),$this->getCity(),$this->getPrice(),$this->getImage()]);
     }

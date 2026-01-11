@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/Database.php"; 
-class  User{
+ class  User{
     private $Id;
 
     private $name;
@@ -39,11 +39,9 @@ class  User{
         $query = "SELECT * FROM USERS WHERE email =:email";
         $stmt = $conn->prepare($query);
         
-
         $stmt->execute([":email"=>$email]);
     
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
 
         if (password_verify($password, $user['passwd'])) {
          
@@ -53,8 +51,6 @@ class  User{
             return false;
         }
     }
-
-
 
 public function updatProfile( $id, $firstname, $lastname, $email) {
         try {

@@ -2,8 +2,9 @@
 
 select *from USERS;
 
+use KARI;
 
-create table Rental(
+create table  Rental(
 
 rental_id INT PRIMARY KEY  ,
 
@@ -17,10 +18,11 @@ city varchar(100),
 
 pricepernight int,
 
-capacity varchar(50),
-
-
-image_name varchar(255),
+image_name varchar(255)
 
 
 )
+
+
+select * from Rental;
+
