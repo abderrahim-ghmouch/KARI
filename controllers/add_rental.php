@@ -11,14 +11,9 @@ $city = $_POST["city"];
 $addrees = $_POST["address"]; 
 $price = $_POST["price"];
 $host_id = $_SESSION['user_id'];
-$image = $_FILES["image"]["name"];
-$imageName = uniqid() . "-" . $image;
-$image_destination = __DIR__ . "/../images/" . $imageName;
+$image = $_FILES["image"];
 
-move_uploaded_file($_FILES["image"]["tmp_name"], $image_destination);
+$rental=new Rental();
 
-
-$rental=new rental();
-
-$rental->creat($title,$description,$adress,$city,$price,$imageName,$host_id);
+$rental->create($title, $description, $addrees, $city, $price, $image, $host_id);
 
