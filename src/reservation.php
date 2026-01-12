@@ -47,5 +47,40 @@ class Reservation
         return $this->total_price;
     }
 
-    
+    public function __construct(
+        $id="",
+        $rental_id="",
+        $user_id="",
+        $start_date="",
+        $end_date="",
+        $total_price=""
+
+    ) {
+        $this->id=$id;
+        $this->rental_id = $rental_id;
+        $this->user_id = $user_id;
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
+        $this->total_price = $total_price;
+    }
+
+    public function reserve(){
+        $db = new Database();
+        $conn = $db->getconnection();
+
+        $query = "INSERT INTO RESERVATION (rental_id, user_id, date_debut, date_fin, total_price) 
+                VALUES (:rental_id, :user_id, :start_date, :end_date, :total_price)";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute([
+            ":rental_id" => $this->rental_id,
+            ":user_id" => $this->user_id,
+            ":start_date" => $this->start_date,
+            ":end_date" => $this->end_date,
+            ":total_price" => $this->total_price
+        ]);
+
+        return $conn->lastInsertId();
+    }
+
 }

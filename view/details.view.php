@@ -103,7 +103,8 @@ $host_details = $host->getById($rental_details->getHostId());
                 <div class="flex justify-between items-center border-b border-cream-border dark:border-gray-800 pb-8">
                     <div>
                         <h2 class="text-xl sm:text-2xl font-bold mb-1 text-deep-navy">Entire propety in
-                            <?= $rental_details->getCity() ?></h2>
+                            <?= $rental_details->getCity() ?>
+                        </h2>
 
                     </div>
                 </div>
@@ -191,7 +192,8 @@ $host_details = $host->getById($rental_details->getHostId());
                     </button>
                 </div>
                 <div class="pb-8">
-                    <h2 class="text-2xl font-bold mb-6 text-deep-navy">Hosted by <?= $host_details->getFullName() ?></h2>
+                    <h2 class="text-2xl font-bold mb-6 text-deep-navy">Hosted by <?= $host_details->getFullName() ?>
+                    </h2>
                     <div class="flex flex-col md:flex-row gap-8 items-start">
                         <div class="flex flex-col gap-2 min-w-[300px]">
                             <div class="flex items-center gap-4 mb-2">
@@ -205,11 +207,14 @@ $host_details = $host->getById($rental_details->getHostId());
                 </div>
             </div>
             <div class="lg:col-span-2">
-                <form method="post"
+                <form method="post" action="../controllers/add_reservation.php" ;
                     class="sticky top-28 bg-cream dark:bg-background-dark border border-cream-border dark:border-gray-700 rounded-xl shadow-[0_6px_16px_rgba(0,0,0,0.12)] p-6">
+                    <input type="hidden" name="rental_id" value="<?= $rental_details->getId() ?>" />
+                    <input type="hidden" name="price" value="<?= $rental_details->getPrice() ?>" />
                     <div class="flex justify-between items-end mb-6">
                         <div class="flex items-baseline gap-1">
-                            <span class="text-2xl font-bold text-deep-navy dark:text-white">$<?= $rental_details->getPrice() ?></span>
+                            <span
+                                class="text-2xl font-bold text-deep-navy dark:text-white">$<?= $rental_details->getPrice() ?></span>
                             <span class="text-gray-600 dark:text-gray-400 font-normal">/ night</span>
                         </div>
                         <div class="flex items-center gap-1 text-sm font-medium">
@@ -242,7 +247,7 @@ $host_details = $host->getById($rental_details->getHostId());
                             <div>
                                 <label
                                     class="block text-[10px] font-bold uppercase tracking-wider text-deep-navy dark:text-gray-200">Nights</label>
-                                <input type="number" class="w-full text-sm text-gray-600 dark:text-gray-400"
+                                <input type="number" name="nightnumber" class="w-full text-sm text-gray-600 dark:text-gray-400"
                                     placeholder="Nights number" />
                             </div>
                             <span class="material-symbols-outlined text-gray-600 text-xl">keyboard_arrow_down</span>
