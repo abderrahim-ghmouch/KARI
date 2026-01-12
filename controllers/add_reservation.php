@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include __DIR__ . "/../src/Database.php";
+include __DIR__ . "/Database.php";
 include __DIR__ . "/../src/reservation.php";
 
 $rental_id = $_POST['rental_id'];

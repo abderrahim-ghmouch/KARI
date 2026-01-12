@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+include __DIR__ . "/Database.php";
+include __DIR__ . "/../src/reservation.php";
+include __DIR__ . "/../src/rentale.php";
+
+$reservation = new Reservation();
+$reservations = $reservation->getallresrvation($_SESSION['user_id']);
+
+?>
+
+
+
+
 <!DOCTYPE html>
 
 <html class="light" lang="en">
@@ -102,7 +117,7 @@
             </header>
             <main class="flex-1 flex justify-center py-10 px-4 md:px-10 lg:px-40">
                 <div class="layout-content-container flex flex-col max-w-[1024px] flex-1">
-                    <!-- Page Heading -->
+                   
                     <div class="flex flex-wrap justify-between items-end gap-3 px-4 pb-6">
                         <h1 class="text-[#151413] text-4xl font-black leading-tight tracking-[-0.033em]">Trips</h1>
                     </div>
@@ -111,123 +126,63 @@
                         <div class="flex border-b border-black/10 px-4 gap-8">
                             <a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-[13px] pt-4 transition-all"
                                 href="#">
-                                <p class="text-sm font-bold leading-normal tracking-wide">Upcoming</p>
+                                <p class="text-sm font-bold leading-normal tracking-wide">reserved</p>
                             </a>
-                            <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#7b746f] pb-[13px] pt-4 hover:text-primary transition-all"
-                                href="#">
-                                <p class="text-sm font-bold leading-normal tracking-wide">Past</p>
-                            </a>
+                         
                         </div>
                     </div>
                     <!-- Reservation List -->
                     <div class="flex flex-col gap-6 px-4">
                         <!-- Reservation Card 1 -->
-                        <div
-                            class="flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl bg-white p-6 shadow-sm border border-black/5 hover:shadow-md transition-shadow">
-                            <div class="w-full md:w-64 bg-center bg-no-repeat aspect-video md:aspect-square bg-cover rounded-lg"
-                                data-alt="Serene lakeside cabin with mountain view"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhaa6VKtuRVHi1U1akO8lppTv0byP7Vchu8DN7HWH6RWHkIuD8pyzy8MwFgzfegRy9sRIIdXCBgaRbDUnAE8nv5tiPKV4jtnqJCtY3DNxjSmb9wxHuKNkOoVHTE9zHAP9LiGf25s6i_Zvtea_HfDC1TI01ZZn9u3nDi12F44Td4Oxn7mTyxAHpR9qvuCeaza9cBPZNmYTH3AjvFWXNOTLu5PpwbVj4kwRfMuqecEcWcFQh9x_WnSNW4D1qwwPWRETUwTOYekaogIlC");'>
-                            </div>
-                            <div class="flex flex-1 flex-col justify-between py-1">
-                                <div class="flex flex-col gap-2">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary text-white">
-                                            Confirmed
-                                        </span>
-                                        <span class="text-[#7b746f] text-xs font-medium">Reservation #KA-29482</span>
-                                    </div>
-                                    <h3 class="text-[#151413] text-xl font-black leading-tight">Serene Lakeside Cabin
-                                    </h3>
-                                    <div class="flex items-center gap-1 text-[#7b746f] text-sm">
-                                        <span class="material-symbols-outlined text-base">location_on</span>
-                                        <p>Lake Tahoe, California</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 text-primary font-semibold text-sm mt-1">
-                                        <span class="material-symbols-outlined text-base">calendar_today</span>
-                                        <p>Oct 12 – Oct 15, 2023</p>
-                                    </div>
+                        <?php foreach($reservations as $reservation): ?>
+                            <?php 
+                                $rental = new Rental();
+                                $rental_details = $rental->getById($reservation->getRentalId());    
+                            ?>
+                            <div
+                                class="flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl bg-white p-6 shadow-sm border border-black/5 hover:shadow-md transition-shadow">
+                                <div class="w-full md:w-64 bg-center bg-no-repeat aspect-video md:aspect-square bg-cover rounded-lg"
+                                    data-alt="Serene lakeside cabin with mountain view"
+                                    style='background-image: url("/images/<?= $rental_details->getImage() ?>");'>
                                 </div>
-                                <div class="mt-4">
+                                <div class="flex flex-1 flex-col justify-between py-1">
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary text-white">
+                                                Confirmed
+                                            </span>
+
+                                            <span class="text-[#7b746f] text-xs font-medium">Reservation #KA-29482</span>
+                                        </div>
+                                        <h3 class="text-[#151413] text-xl font-black leading-tight">
+                                        </h3>
+                                        <div class="flex items-center gap-1 text-[#7b746f] text-sm">
+                                            <span class="material-symbols-outlined text-base">location_on</span>
+                                            <p><?=$rental_details->getAddress()?>, <?=$rental_details->getcity()?>,</p>
+                                        </div>
+                                        <div class="flex items-center gap-1 text-primary font-semibold text-sm mt-1">
+                                            <span class="material-symbols-outlined text-base">calendar_today</span>
+                                            <p>Oct 12 – Oct 15, 2023</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div
+                                    class="flex flex-col justify-center gap-3 md:border-l md:border-black/5 md:pl-6 min-w-[180px]">
                                     <button
-                                        class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white gap-2 text-sm font-bold hover:bg-primary/90 transition-all">
-                                        <span class="material-symbols-outlined text-lg">chat_bubble</span>
-                                        <span>Message Host</span>
+                                        class="flex items-center justify-center rounded-lg h-10 px-4 bg-background-light text-[#151413] text-sm font-bold hover:bg-kari-earth/20 transition-all w-full">
+                                        <span class="truncate">View Receipt</span>
+                                    </button>
+                                    <button
+                                        class="flex items-center justify-center rounded-lg h-10 px-4 bg-transparent text-[#7b746f] hover:text-red-600 hover:bg-red-50 text-sm font-bold transition-all w-full">
+                                        <span class="truncate">Cancel Reservation</span>
                                     </button>
                                 </div>
                             </div>
-                            <div
-                                class="flex flex-col justify-center gap-3 md:border-l md:border-black/5 md:pl-6 min-w-[180px]">
-                                <button
-                                    class="flex items-center justify-center rounded-lg h-10 px-4 bg-background-light text-[#151413] text-sm font-bold hover:bg-kari-earth/20 transition-all w-full">
-                                    <span class="truncate">View Receipt</span>
-                                </button>
-                                <button
-                                    class="flex items-center justify-center rounded-lg h-10 px-4 bg-transparent text-[#7b746f] hover:text-red-600 hover:bg-red-50 text-sm font-bold transition-all w-full">
-                                    <span class="truncate">Cancel Reservation</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Reservation Card 2 -->
-                        <div
-                            class="flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl bg-white p-6 shadow-sm border border-black/5 hover:shadow-md transition-shadow">
-                            <div class="w-full md:w-64 bg-center bg-no-repeat aspect-video md:aspect-square bg-cover rounded-lg"
-                                data-alt="Modern desert loft with infinity pool"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDVcYhfrO5Xbqwa7MQt5X2gyiYPEGAjpsFS1hBMd_KUMLfmQd8z6EcvULiGOCi9_L4TA8z8c-pEmM227NVFQZK3jfMEtvEB_dvDfL0S94TJJkVm2q_RrmCx3cP2bIAvb29WSoA8lL2iDqgd_1b27LeaB2NvWlkbJYbbAnV_99T96ICln11SPGdIenh6XqCq0PcaQvR4XuA-WMzkAB3Ez7nFgEHCgUVPY5iJVX55PEgCN-VCE5Zb86vwQnF5x8f6zmcq8rVeJhXM4YHh");'>
-                            </div>
-                            <div class="flex flex-1 flex-col justify-between py-1">
-                                <div class="flex flex-col gap-2">
-                                    <div class="flex items-center gap-2">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary text-white">
-                                            Confirmed
-                                        </span>
-                                        <span class="text-[#7b746f] text-xs font-medium">Reservation #KA-30114</span>
-                                    </div>
-                                    <h3 class="text-[#151413] text-xl font-black leading-tight">Modern Desert Oasis</h3>
-                                    <div class="flex items-center gap-1 text-[#7b746f] text-sm">
-                                        <span class="material-symbols-outlined text-base">location_on</span>
-                                        <p>Joshua Tree, California</p>
-                                    </div>
-                                    <div class="flex items-center gap-1 text-primary font-semibold text-sm mt-1">
-                                        <span class="material-symbols-outlined text-base">calendar_today</span>
-                                        <p>Nov 04 – Nov 08, 2023</p>
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <button
-                                        class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white gap-2 text-sm font-bold hover:bg-primary/90 transition-all">
-                                        <span class="material-symbols-outlined text-lg">chat_bubble</span>
-                                        <span>Message Host</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div
-                                class="flex flex-col justify-center gap-3 md:border-l md:border-black/5 md:pl-6 min-w-[180px]">
-                                <button
-                                    class="flex items-center justify-center rounded-lg h-10 px-4 bg-background-light text-[#151413] text-sm font-bold hover:bg-kari-earth/20 transition-all w-full">
-                                    <span class="truncate">View Receipt</span>
-                                </button>
-                                <button
-                                    class="flex items-center justify-center rounded-lg h-10 px-4 bg-transparent text-[#7b746f] hover:text-red-600 hover:bg-red-50 text-sm font-bold transition-all w-full">
-                                    <span class="truncate">Cancel Reservation</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Info Banner -->
-                        <div class="bg-primary/10 border border-primary/20 rounded-xl p-6 flex items-start gap-4">
-                            <span class="material-symbols-outlined text-primary text-2xl">info</span>
-                            <div class="flex-1">
-                                <h4 class="text-[#151413] font-bold text-base">Travel plans changed?</h4>
-                                <p class="text-[#7b746f] text-sm mt-1">Most reservations offer flexible cancellation up
-                                    to 48 hours before check-in. Check individual property policies for specific
-                                    details.</p>
-                                <a class="inline-block mt-3 text-primary text-sm font-bold hover:underline"
-                                    href="#">Read Cancellation Policy</a>
-                            </div>
-                        </div>
+                        <?php endforeach;?>
                     </div>
-                </div>
+                </div>       
             </main>
             <!-- Footer for consistency -->
             <footer class="mt-auto border-t border-black/5 bg-white py-10 px-10 text-center">

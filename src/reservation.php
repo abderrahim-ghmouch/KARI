@@ -83,4 +83,29 @@ class Reservation
         return $conn->lastInsertId();
     }
 
+    public function getallresrvation($user_id){
+        $db = new Database();
+        $conn = $db->getconnection();
+
+        $query = "SELECT * FROM RESERVATION WHERE user_id = :user_id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([":user_id" => $user_id]);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $reservations = [];
+
+        foreach ($data as $row) {
+            $reservation = new Reservation(
+                $row['reservation_id'],
+                $row['rental_id'],
+                $row['user_id'],
+                $row['date_debut'],
+                $row['date_fin'],
+                $row['total_price']
+            );
+            $reservations[] = $reservation;
+        }
+        
+        return $reservations;
+    }
+
 }
