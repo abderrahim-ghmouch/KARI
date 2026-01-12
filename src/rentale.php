@@ -107,6 +107,38 @@ class Rental
         return $rentals;
     }
 
+    public function getById($rental_id)
+    {
+        $db = new Database();
+
+        $conn = $db->getconnection();
+
+        $query = "select * from Rental where rental_id=:rental_id";
+
+        $stmt = $conn->prepare($query);
+
+        $stmt->execute([
+            "rental_id" => $rental_id,
+        ]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return new Rental(
+                $result['rental_id'],
+                $result['host_id'],
+                $result['title'],
+                $result['rental_description'],
+                $result['addrees'],
+                $result['city'],
+                $result['pricepernight'],
+                $result['image_name']
+            );
+        } else {
+            return null;
+        }
+    }
+
     public function getByHostId($host_id)
     {
         $db = new Database();

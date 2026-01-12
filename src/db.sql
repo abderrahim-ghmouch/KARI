@@ -23,5 +23,6 @@ image_name varchar(255)
 
 );
 
-select * from Rental;
+
+select * from RESERVATION;
 
