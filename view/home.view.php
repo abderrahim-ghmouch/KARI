@@ -1,7 +1,10 @@
 <?php
+session_start();
 
+include __DIR__ . "/../src/rentale.php";
 
-
+$rental = new Rental();
+$rentals = $rental->getAll();
 
 ?>
 
@@ -59,35 +62,46 @@
 <body
     class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white overflow-x-hidden antialiased">
     <div class="relative flex min-h-screen w-full flex-col">
-        <header
-            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#D4B59D] dark:border-b-[#4A3B32] bg-[#FDF6E9] dark:bg-[#3D322C] px-4 md:px-10 py-3 sticky top-0 z-50">
-            <div class="flex items-center gap-4 md:gap-8">
-                <div class="flex items-center gap-2 text-primary">
-                    <div class="size-8 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-4xl">travel_explore</span>
-                    </div>
-                    <h2
-                        class="text-text-dark dark:text-[#E3CAA5] text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">
-                        KARI</h2>
-                </div>
-
-            </div>
-            <div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
-                <div class="hidden md:flex items-center gap-6 lg:gap-9">
-                    <a class="text-text-dark dark:text-[#E3CAA5] text-sm font-medium leading-normal hover:text-primary transition-colors"
-                        href="#">Home</a>
-                    <a class="text-primary text-sm font-bold leading-normal" href="favoris.view.php">Favoris</a>
-
-                </div>
-                <div class="flex items-center gap-2">
         
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[#CEAB93] dark:border-[#4A3B32] shadow-sm cursor-pointer"
-                        data-alt="User profile picture showing a smiling person"
-                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCFUNzflqZC7CNajROQ59zef0LwTWhcl316b6Yrg_VMi1vOBjWlHZGqstO6yUAIrsg2Jx1Y5mC3z4ZRRR7ABUF0q5fN_qi0_Jp2sUgC_RChaXtdxS3twCI6fNER7L8iyxTxZ8G3A20ZHtpbx9HRxQHJMU2HTe3mrE6Rtdc1dAbP9ekN0O8N6Ve36lfls8GulUAmhhXkhYUenkNLmmpvJGlC3M6DGD2GKzkuPyx49ydm_hEkbXnG30zQAT9iM7HTIxkTidNlmww2aKxP");'>
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-black/5 bg-white/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-4 text-primary">
+                        <div class="size-6">
+                            <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-[#151413] text-xl font-black leading-tight tracking-tight">KARI</h2>
                     </div>
+                    <label class="flex flex-col min-w-40 h-10 max-w-64 hidden md:flex">
+                        <div class="flex w-full flex-1 items-stretch rounded-full h-full">
+                            <div
+                                class="text-[#7b746f] flex border-none bg-[#f3f2f2] items-center justify-center pl-4 rounded-l-full">
+                                <span class="material-symbols-outlined text-xl">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 border-none bg-[#f3f2f2] focus:ring-0 rounded-r-full text-sm font-normal placeholder:text-[#7b746f] px-4"
+                                placeholder="Search trips" value="" />
+                        </div>
+                    </label>
                 </div>
-            </div>
-        </header>
+                <div class="flex flex-1 justify-end gap-6 items-center">
+                    <div class="hidden lg:flex items-center gap-8">
+                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+                            href="#">home</a>
+                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+                            href="favoris.view.php">Wishlists</a>
+                        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
+                            href="resirvation.view.php">Trips</a>
+                            <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+                            href="profile.view.php">profile</a>
+                    </div>
+                    
+                </div>
+            </header>
         <main class="flex-1">
             <div
                 class="hidden md:flex flex-col items-center justify-center pt-8 pb-6 px-4 md:px-10 bg-background-light dark:bg-background-dark">
@@ -131,331 +145,42 @@
             </div>
 
             <div class="max-w-[1920px] mx-auto px-4 md:px-10 py-6">
-                <div
+                <div 
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10">
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
+                    <?php foreach ($rentals as $rental) : ?>
+                        <a class="flex flex-col gap-3 group cursor-pointer relative" href="/view/details.view.php?rental_id=<?= $rental->getId() ?>">
                             <div
-                                class="absolute top-3 left-3 z-10 bg-accent dark:bg-black/70 px-2 py-1 rounded text-xs font-bold text-text-main dark:text-white shadow-sm">
-                                Guest Favorite</div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Modern downtown loft apartment interior with large windows"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJWJwAxyl1xuCdgX3Us1jvH7LRRiY8P-KXiosgCbsMUdB0fNnzf6jfSQceAO79G3Kxo1r0m86iCVYkXE3bDjMqdvrckohVocdPr7-4ynPiMWFgMTezSSj2vWVKgFUD4GEDQdAjgOyR3cMl5xbtf0oL0HrkigiNJPb9rtbRvISWc4zKl0GvH_rYsXEvmK5S7tdV4PsUIFMiSBK_qFbR1KPwLZjk5sF6P4Kvn4lheH7qsWkUmUDMB6GSRr7UDA3FkelTmKs6Y07U0iTF");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Seattle,
-                                    Washington</h3>
-                                <div class="flex items-center gap-1">
+                                class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
+                                <div class="absolute top-3 right-3 z-10">
                                     <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.98</span>
+                                        class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
+                                </div>
+                        
+                                <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
+                                    data-alt="Modern downtown loft apartment interior with large windows"
+                                    style='background-image: url("/images/<?= $rental->getImage()?>");'>
                                 </div>
                             </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                                Downtown Loft Views</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Oct 15
-                                - 20</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$134</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Cozy wooden cabin nestled in a snowy forest"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABskpmJnfw2gLxWDZ0xqRYnYqEwbaDpuIhzCH5mEHfRHGpl3HgVe_QWETW7twLyYZ2PkTFsgmXkUizm6WyrU8tMupxf0Ciwno9pfTt7e5gg3oMAs7van8bjv1LUFg2nELNbYqzgRMeaho94NG1bRmlX-PtuNcVpOnyPg4_FUaSivo_sO0_gr3crjUFFP_VlvET_D3QidKFCky9ixKRxuiUghCjw8YLS0ysmEujclZ3EuA7Iu4HoYnBY9mdg6NItoBNR3LDZjpwgNwf");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Stowe,
-                                    Vermont</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">5.0</span>
+                            <div class="flex flex-col gap-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate"><?= $rental->getTitle() ?>
+                            </h3>
+                                    <div class="flex items-center gap-1">
+                                        <span
+                                            class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
+                                        <span class="text-text-main dark:text-white text-[15px] font-light">4.98</span>
+                                    </div>
+                                </div>
+                                <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
+                            <?= $rental->getCity() ?></p>
+                    
+                                <div class="flex items-center gap-1 mt-1">
+                                    <p class="text-text-main dark:text-white text-[15px] font-semibold"><?= $rental->getPrice() ?>$</p>
+                                    <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
                                 </div>
                             </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Cozy
-                                Cabin Retreat</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Nov 3
-                                - 10</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$250</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Modern beach house with glass windows facing the ocean"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD7364D41ttyyJLSBH_RSOUrXkDox7DZABtt8UClQWOTaKHV9_Iq0ldkb2fur2JZJRogmqqgBRaSlVJI9-6i-vLuI72uoHQqIOE4oqj43lQc-Um8iibvCEjORHEMSZo2X8-bW6LzY5TN-yaxJUYmE0B_rw8HBm1qa9z0HfWGW4_IOQAQO3wXqg7Am8mo1PQh-Ua1fdXc1DOx9BysLcNacGWESAKKqmKLtjvYziAFORNsfJqlPcaDsrg_bWvcMjzmVg1_ypSj8ycI-tZ");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Malibu,
-                                    California</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.85</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                                Beachfront Paradise</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Dec 1
-                                - 7</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$450</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Luxurious penthouse with city skyline view at night"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAcHG-c4paq2UNKSw6LvOEKNXI36_vPjoO2U3EKw-hgKc0JjkUKLjeRr-vkG5gDFhty61cHs95aeYFZg3k1gUOPTrexOJ6CmHwKUBHvCTcx5Tqp8ZMnL5uxsl9xrNfjregT0xLVe-kNedIYy-cbhrtWVpzlOvkGmkvby17zKLCXsa_SiutBHFYTYgYQYE8LSSPJ6ICuxIhiguyuHKYbxNcn4xy7_3H5a_2WuU7rB2QsrQ0v0lROJCwrnXyOAiWMHMsf-8oiHpqIlOH8");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">New York,
-                                    New York</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.92</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                                Midtown Penthouse</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Jan 10
-                                - 15</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$300</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Unique bamboo treehouse in the middle of a lush jungle"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCwEF55nTcGnv1OOBOjkn4M_BPX9e6jim0T5Qd6V1cVPR_ZJlRMRIg7-4jIAWWev7jGv6zzY9tCnWbL3KSOfBlS1Bgl4l_0VExL2_xIf6trR13jOGW6RrwlJCHwjEJqNsWytqIMnmziNCTiBkdauLhkaRK0A9NVs_Ty9j5ZXmFGnfdmeDi9rWoAAjgZy1fMboCQgQXEhvB9sWilKYFnKVK_Xr-_DvpqkRfLWNwDBFmt76oNR7ACqBIQKj91MMMMsvMFvYuJi480Mx7W");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Bali,
-                                    Indonesia</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.99</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Jungle
-                                Treehouse</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Feb 14
-                                - 20</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$180</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Peaceful cottage sitting on the edge of a calm lake"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiWxV8xT6HATv3MBI_KJ9XoGtP3m-ra4HzSVks6SXUNBXONzA7PGMn2rgDylPdB_quDLE0mX8UyyHT98fgGf_B-VCYhB1FySy3ibKvqxLrQOAqMND_aYIg1NfJU3BH2-JU49fPH38vJnnkLFJssmX-JISESb3T2vFisNnDmTHvXeC4bkX6EE2vwFpjJSI-xkBOc02Rj1tQ-IOP2Sy8mQcvwTnczp6aKjseZ8SKJQYcnc7DJjGDm-U5rEKhCJJprCp5H7UHiSeydRGp");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Lake
-                                    Tahoe, Nevada</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.75</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                                Lakeview Cottage</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Mar 5
-                                - 10</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$210</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Geodesic dome glamping tent in a desert landscape"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYjNAlGJLNTsNRRoCPTXb1DTUpvlQvX18hr53ki2t2hif_xUp-YX4i3-bXg2qUJx3SKVVc9SHhcvbUIbuNsSWOMdZNpVRPfHY4nZvZe90uh1SemO7G-LL2Js351c571E64-cfFwWOuGWU5EtUa7Vh9HDfPEW38qyg00CA7vhADvyiamQ7a-WK59x9WUyvLBw6wjZjAoAzsXxDh2ktAbR-jGAT17kck17uf0tmqLZWi05DC5ayg9RFRIMOoQ9PaV7JrHZoYU61vTSvL");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Joshua
-                                    Tree, CA</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.90</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Desert
-                                Stargazing Dome</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Apr 12
-                                - 18</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$150</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="A-frame ski chalet covered in snow in the mountains"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXstXwsb5MhOQzdGLyREFgJpww-fy6Yi2JY2Hqxr_PbnvufvHGooO9NbLHupEqXJ1gFiQ-imjYpCP1dX3z-XsWXoSGQSXEhTKCsetfeY1J72bWoo66LR7UKGEhWBFOq-OgKgs-PWknON7qzr2-z6JF7HVyXWpz0ka52jXzeHxDcJ6NM0qj8gJKw7H3Y1tQhGCj4M4o1unOlyAl90vKJ1M4KrOXiKwja4IKwrtcmhZYimU_MxZffxMXi0FjhNavL0MOp0mpRQPu8TQN");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Aspen,
-                                    Colorado</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.88</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                                Mountain Chalet</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Dec 20
-                                - 27</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$400</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Modern house on a cliff overlooking the ocean"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBQfcmydIltzDeTw1w3qRyFwvDHLiv3MHP0--S2hW1NHVcnBbVP41q7jMfNdMm4WqkQ-ZNssHzfTHnA69zojDoiwSwt4KVno2nLyLHbBQBGHvO__dEstpsZjwfCVaO5LdddbmtGFCkM-f6IQHMxcUuv3fNlnAtWLyNRc8SYs7uhGwvygwOMcDCGlEnTWkoDiCruo3iW1Bv7EAeAX8SN9hs8eD9d6GKL1JpvgpdF3jkEtQ8fSimS9m63fyaE7WghKUdKTzUgoneHKwwi");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Santorini,
-                                    Greece</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.97</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                                Cliffside Villa</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Jul 5
-                                - 12</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$320</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 group cursor-pointer relative">
-                        <div
-                            class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                            <div class="absolute top-3 right-3 z-10">
-                                <span
-                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</span>
-                            </div>
-                            <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
-                                data-alt="Floating houseboat on a calm river"
-                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBTYf-pDjrstCXyOOxwcgElfE9RwgEDETZ7Ede9QPo9d5ZgxU_7b2QuAy3MtZfR0p4FhXBopLg_SfMocpmN4Rw-T79j6ESQG4h6vv_1dPjz6IPCrFOugNtR5hIDU9p2h-Gf5WFCSRbpFZv9vf4bycleTciiER03iNQWCw-16pxJVmo1bX_LBnxn909Qzx0UZZcMoFZsuejHH9isV99raXxqZaHViOv-MnYphZiEo5b97FSCTwXMvtiaFBF7iGvrV4XcPQ3mNNeipX1");'>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">Amsterdam,
-                                    Netherlands</h3>
-                                <div class="flex items-center gap-1">
-                                    <span
-                                        class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
-                                    <span class="text-text-main dark:text-white text-[15px] font-light">4.82</span>
-                                </div>
-                            </div>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">Canal
-                                Houseboat</p>
-                            <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">May 10
-                                - 15</p>
-                            <div class="flex items-center gap-1 mt-1">
-                                <p class="text-text-main dark:text-white text-[15px] font-semibold">$195</p>
-                                <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
-                            </div>
-                        </div>
-                    </div>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
             </div>
             

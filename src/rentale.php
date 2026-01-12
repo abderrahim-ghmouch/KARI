@@ -73,6 +73,40 @@ class Rental
         return $this->image;
     }
 
+    public function getAll()
+    {
+        $db = new Database();
+
+        $conn = $db->getconnection();
+
+        $query = "select * from Rental order by rental_id desc";
+
+        $stmt = $conn->prepare($query);
+
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $rentals = [];
+
+        foreach ($results as $result) {
+            $rental = new Rental(
+                $result['rental_id'],
+                $result['host_id'],
+                $result['title'],
+                $result['rental_description'],
+                $result['addrees'],
+                $result['city'],
+                $result['pricepernight'],
+                $result['image_name']
+            );
+
+            $rentals[] = $rental;
+        }
+
+        return $rentals;
+    }
+
     public function getByHostId($host_id)
     {
         $db = new Database();

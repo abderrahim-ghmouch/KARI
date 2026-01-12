@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>KARI</title>
+    <title>Guest Reservations Management - KARI</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -54,7 +54,8 @@
 <body class="bg-kari-cream dark:bg-background-dark min-h-screen font-display">
     <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
-            <!-- Top Navigation Bar -->
+
+
             <header
                 class="flex items-center justify-between whitespace-nowrap border-b border-solid border-black/5 bg-white/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
                 <div class="flex items-center gap-8">
@@ -83,9 +84,9 @@
                 <div class="flex flex-1 justify-end gap-6 items-center">
                     <div class="hidden lg:flex items-center gap-8">
                         <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="#">Explore</a>
+                            href="home.view.php">home</a>
                         <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="#">Wishlists</a>
+                            href="favoris.view.php">Wishlists</a>
                         <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
                             href="#">Trips</a>
                     </div>
@@ -167,7 +168,7 @@
                                 </button>
                             </div>
                         </div>
-
+                        <!-- Reservation Card 2 -->
                         <div
                             class="flex flex-col md:flex-row items-stretch justify-between gap-6 rounded-xl bg-white p-6 shadow-sm border border-black/5 hover:shadow-md transition-shadow">
                             <div class="w-full md:w-64 bg-center bg-no-repeat aspect-video md:aspect-square bg-cover rounded-lg"
@@ -228,7 +229,7 @@
                     </div>
                 </div>
             </main>
-
+            <!-- Footer for consistency -->
             <footer class="mt-auto border-t border-black/5 bg-white py-10 px-10 text-center">
                 <div class="flex flex-col items-center gap-4">
                     <div class="flex items-center gap-2 text-primary opacity-50">

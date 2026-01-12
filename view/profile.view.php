@@ -82,7 +82,7 @@ $row=$stmt->fetch();
         </span>
     </button>
 </form>
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold cursor-pointer hover:scale-110 transition-transform">JD</div>
+                <div href="profile.view.php" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold cursor-pointer hover:scale-110 transition-transform">JD</div>
             </div>
         </header>
 

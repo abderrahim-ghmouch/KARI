@@ -52,7 +52,7 @@
 
         body {
             background-color: #E3CAA5;
-            /* Requested specific background */
+          
         }
     </style>
 </head>
@@ -60,32 +60,55 @@
 <body class="font-display">
     <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
-   
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#D4B59D] dark:border-b-[#4A3B32] bg-[#FDF6E9] dark:bg-[#3D322C] px-4 md:px-10 py-3 sticky top-0 z-50">
-<div class="flex items-center gap-4 md:gap-8">
-<div class="flex items-center gap-2 text-primary">
-<div class="size-8 flex items-center justify-center">
-<span class="material-symbols-outlined text-4xl">travel_explore</span>
-</div>
-<h2 class="text-text-dark dark:text-[#E3CAA5] text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">KARI</h2>
-</div>
 
-</div>
-<div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
-<div class="hidden md:flex items-center gap-6 lg:gap-9" >
-<a class="text-text-dark dark:text-[#E3CAA5] text-sm font-medium leading-normal hover:text-primary transition-colors" href="home.view.php">Home</a>
-<a class="text-primary text-sm font-bold leading-normal" href="#">Favoris</a>
-
-</div>
-<div class="flex items-center gap-2">
-
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[#CEAB93] dark:border-[#4A3B32] shadow-sm cursor-pointer" data-alt="User profile picture showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCFUNzflqZC7CNajROQ59zef0LwTWhcl316b6Yrg_VMi1vOBjWlHZGqstO6yUAIrsg2Jx1Y5mC3z4ZRRR7ABUF0q5fN_qi0_Jp2sUgC_RChaXtdxS3twCI6fNER7L8iyxTxZ8G3A20ZHtpbx9HRxQHJMU2HTe3mrE6Rtdc1dAbP9ekN0O8N6Ve36lfls8GulUAmhhXkhYUenkNLmmpvJGlC3M6DGD2GKzkuPyx49ydm_hEkbXnG30zQAT9iM7HTIxkTidNlmww2aKxP");'></div>
-</div>
-</div>
-</header>
+     
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-black/5 bg-white/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-4 text-primary">
+                        <div class="size-6">
+                            <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-[#151413] text-xl font-black leading-tight tracking-tight">KARI</h2>
+                    </div>
+                    <label class="flex flex-col min-w-40 h-10 max-w-64 hidden md:flex">
+                        <div class="flex w-full flex-1 items-stretch rounded-full h-full">
+                            <div
+                                class="text-[#7b746f] flex border-none bg-[#f3f2f2] items-center justify-center pl-4 rounded-l-full">
+                                <span class="material-symbols-outlined text-xl">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 border-none bg-[#f3f2f2] focus:ring-0 rounded-r-full text-sm font-normal placeholder:text-[#7b746f] px-4"
+                                placeholder="Search trips" value="" />
+                        </div>
+                    </label>
+                </div>
+                <div class="flex flex-1 justify-end gap-6 items-center">
+                    <div class="hidden lg:flex items-center gap-8">
+                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+                            href="home.view.php">home</a>
+                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+                            href="#">Wishlists</a>
+                        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
+                            href="reservation.view.php">Trips</a>
+                    </div>
+                    <button
+                        class="flex items-center justify-center rounded-full size-10 bg-[#f3f2f2] text-[#151413] hover:bg-kari-earth/20 transition-all">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20"
+                        data-alt="User profile avatar"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2FR_ShPg2PeLCg0_Ry7DKHrKwTGkJlIdMZkP5xuelzcRNkD6kP3XepG2Weo6tTl4Y6kIBKwxUhOV9iO79Hj7xJbtUwxfEDDIy4yz_ugh2xNc0DfEzcUoAbl39sk5aP-I1aHiH0IDR3Wi1FLxkHNUbCsVq2r5XujR5gmtjW2iGzAhb69hVx2frbz4rXLevqi2DV7fjcZA-EKv_5_D6ub3Kx7OocGxMpq-_2N05EN2EO8l3Z_9u1g-ypRPF8_t2zoKTgi7KXUVdgq9m");'>
+                    </div>
+                </div>
+            </header>
             <main class="flex-1 flex flex-col items-center">
                 <div class="w-full max-w-[1200px] px-6 lg:px-10 py-10">
-                    <!-- Page Heading -->
+                
                     <div class="flex flex-wrap justify-between items-end gap-3 mb-8">
                         <div class="flex flex-col gap-2">
                             <h1 class="text-[#151413] text-4xl font-black leading-tight tracking-[-0.033em]">Your
