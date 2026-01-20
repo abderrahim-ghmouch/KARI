@@ -64,46 +64,50 @@ $rentals = $rental->getAll();
 <body
     class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-white overflow-x-hidden antialiased">
     <div class="relative flex min-h-screen w-full flex-col">
-        
-            <header
-                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-black/5 bg-white/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
-                <div class="flex items-center gap-8">
-                    <div class="flex items-center gap-4 text-primary">
-                        <div class="size-6">
-                            <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </div>
-                        <h2 class="text-[#151413] text-xl font-black leading-tight tracking-tight">KARI</h2>
+
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-black/5 bg-white/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4 text-primary">
+                    <div class="size-6">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                                fill="currentColor"></path>
+                        </svg>
                     </div>
-                    <label class="flex flex-col min-w-40 h-10 max-w-64 hidden md:flex">
-                        <div class="flex w-full flex-1 items-stretch rounded-full h-full">
-                            <div
-                                class="text-[#7b746f] flex border-none bg-[#f3f2f2] items-center justify-center pl-4 rounded-l-full">
-                                <span class="material-symbols-outlined text-xl">search</span>
-                            </div>
-                            <input
-                                class="form-input flex w-full min-w-0 flex-1 border-none bg-[#f3f2f2] focus:ring-0 rounded-r-full text-sm font-normal placeholder:text-[#7b746f] px-4"
-                                placeholder="Search trips" value="" />
+                    <h2 class="text-[#151413] text-xl font-black leading-tight tracking-tight">KARI</h2>
+                </div>
+                <label class="flex flex-col min-w-40 h-10 max-w-64 hidden md:flex">
+                    <div class="flex w-full flex-1 items-stretch rounded-full h-full">
+                        <div
+                            class="text-[#7b746f] flex border-none bg-[#f3f2f2] items-center justify-center pl-4 rounded-l-full">
+                            <span class="material-symbols-outlined text-xl">search</span>
                         </div>
-                    </label>
-                </div>
-                <div class="flex flex-1 justify-end gap-6 items-center">
-                    <div class="hidden lg:flex items-center gap-8">
-                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="#">home</a>
-                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="favoris.view.php">Wishlists</a>
-                        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
-                            href="resirvation.view.php">Trips</a>
-                            <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="profile.view.php">profile</a>
+                        <input
+                            class="form-input flex w-full min-w-0 flex-1 border-none bg-[#f3f2f2] focus:ring-0 rounded-r-full text-sm font-normal placeholder:text-[#7b746f] px-4"
+                            placeholder="Search trips" value="" />
                     </div>
-                    
+                </label>
                 </div>
-            </header>
+                 <div class="flex flex-1 justify-end gap-6 items-center">
+    <div class="hidden lg:flex items-center gap-8">
+
+        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
+            href="#">home</a>
+
+        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+            href="favoris.view.php">Wishlists</a>
+
+        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+            href="resirvation.view.php">Trips</a>
+
+        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+            href="profile.view.php">profile</a>
+
+    </div>
+</div>
+        </header>
         <main class="flex-1">
             <div
                 class="hidden md:flex flex-col items-center justify-center pt-8 pb-6 px-4 md:px-10 bg-background-light dark:bg-background-dark">
@@ -147,42 +151,46 @@ $rentals = $rental->getAll();
             </div>
 
             <div class="max-w-[1920px] mx-auto px-4 md:px-10 py-6">
-                <div 
+                <div
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-10">
-                    <?php foreach ($rentals as $rental) : ?>
-                        <a class="flex flex-col gap-3 group cursor-pointer relative" href="/view/details.view.php?rental_id=<?= $rental->getId() ?>">
+                    <?php foreach ($rentals as $rental): ?>
+                        <a class="flex flex-col gap-3 group cursor-pointer relative"
+                            href="/view/details.view.php?rental_id=<?= $rental->getId() ?>">
                             <div
                                 class="relative w-full aspect-[20/19] rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-700">
-                                <?php if(isset($_SESSION["user_id"])): ?>
+                                <?php if (isset($_SESSION["user_id"])): ?>
                                     <div class="absolute top-3 right-3 z-10">
-                                        <?php 
-                                            $favorite = new Favorite();
+                                        <?php
+                                        $favorite = new Favorite();
 
-                                            $isFavorited = $favorite->isFavorite($_SESSION['user_id'], $rental->getId());
+                                        $isFavorited = $favorite->isFavorite($_SESSION['user_id'], $rental->getId());
                                         ?>
-                                        <?php if($isFavorited): ?>
+                                        <?php if ($isFavorited): ?>
                                             <form action="../controllers/remove_favorite.php" method="post">
                                                 <input type="hidden" name="rental_id" value="<?= $rental->getId() ?>">
-                                                <button type="submit" class="material-symbols-outlined text-red-500/70 hover:text-red-500 text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
+                                                <button type="submit"
+                                                    class="material-symbols-outlined text-red-500/70 hover:text-red-500 text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
                                             </form>
                                         <?php else: ?>
                                             <form action="../controllers/add_favorite.php" method="post">
                                                 <input type="hidden" name="rental_id" value="<?= $rental->getId() ?>">
-                                                <button type="submit" class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
+                                                <button type="submit"
+                                                    class="material-symbols-outlined text-white/70 hover:text-white text-2xl drop-shadow-md cursor-pointer transition-transform active:scale-90">favorite</button>
                                             </form>
                                         <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
-                        
+
                                 <div class="w-full h-full bg-center bg-no-repeat bg-cover transform group-hover:scale-105 transition-transform duration-500"
                                     data-alt="Modern downtown loft apartment interior with large windows"
-                                    style='background-image: url("/images/<?= $rental->getImage()?>");'>
+                                    style='background-image: url("/images/<?= $rental->getImage() ?>");'>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-1">
                                 <div class="flex justify-between items-start">
-                                    <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate"><?= $rental->getTitle() ?>
-                            </h3>
+                                    <h3 class="text-text-main dark:text-white font-semibold text-[15px] truncate">
+                                        <?= $rental->getTitle() ?>
+                                    </h3>
                                     <div class="flex items-center gap-1">
                                         <span
                                             class="material-symbols-outlined text-sm text-text-main dark:text-white">star</span>
@@ -190,10 +198,13 @@ $rentals = $rental->getAll();
                                     </div>
                                 </div>
                                 <p class="text-text-secondary dark:text-gray-400 text-[15px] font-light leading-snug">
-                            <?= $rental->getCity() ?></p>
-                    
+                                    <?= $rental->getCity() ?>
+                                </p>
+
                                 <div class="flex items-center gap-1 mt-1">
-                                    <p class="text-text-main dark:text-white text-[15px] font-semibold"><?= $rental->getPrice() ?>$</p>
+                                    <p class="text-text-main dark:text-white text-[15px] font-semibold">
+                                        <?= $rental->getPrice() ?>$
+                                    </p>
                                     <p class="text-text-main dark:text-white text-[15px] font-light">night</p>
                                 </div>
                             </div>
@@ -201,7 +212,7 @@ $rentals = $rental->getAll();
                     <?php endforeach; ?>
                 </div>
             </div>
-            
+
         </main>
         <footer class="bg-white dark:bg-background-dark border-t border-accent/20 dark:border-gray-800 pb-20 md:pb-6">
             <div class="max-w-[1920px] mx-auto px-4 md:px-10 py-10">

@@ -15,21 +15,21 @@ class User {
 }
 
 class Voyageur {
-  +rechercherLogement()
-  +reserverLogement()
-  +annulerReservation()
+  -rechercherLogement()
+  -reserverLogement()
+  -annulerReservation()
 }
 
 
 class Host {
-    +creerHost()
-  +modifierHost()
-  +supprimerHost()
+  -creerHost()
+  -modifierHost()
+  -supprimerHost()
 }
 
 class Admin {
-+activer les compts()
-+desactiver lescompts()
+-activer les compts()
+-desactiver lescompts()
 
 }
 
@@ -64,7 +64,7 @@ Logement "1" -- "0..*" Reservation : contain
 ' 
 class Favori {
   -id : int
-  +ajouter()
+  +addToFavorites()
   +supprimer()
 }
 

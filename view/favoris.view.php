@@ -102,23 +102,22 @@ $favorites = $favorite->getAllFavoritesByUser($_SESSION['user_id']);
                     </label>
                 </div>
                 <div class="flex flex-1 justify-end gap-6 items-center">
-                    <div class="hidden lg:flex items-center gap-8">
-                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="home.view.php">home</a>
-                        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
-                            href="#">Wishlists</a>
-                        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
-                            href="reservation.view.php">Trips</a>
-                    </div>
-                    <button
-                        class="flex items-center justify-center rounded-full size-10 bg-[#f3f2f2] text-[#151413] hover:bg-kari-earth/20 transition-all">
-                        <span class="material-symbols-outlined">notifications</span>
-                    </button>
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20"
-                        data-alt="User profile avatar"
-                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC2FR_ShPg2PeLCg0_Ry7DKHrKwTGkJlIdMZkP5xuelzcRNkD6kP3XepG2Weo6tTl4Y6kIBKwxUhOV9iO79Hj7xJbtUwxfEDDIy4yz_ugh2xNc0DfEzcUoAbl39sk5aP-I1aHiH0IDR3Wi1FLxkHNUbCsVq2r5XujR5gmtjW2iGzAhb69hVx2frbz4rXLevqi2DV7fjcZA-EKv_5_D6ub3Kx7OocGxMpq-_2N05EN2EO8l3Z_9u1g-ypRPF8_t2zoKTgi7KXUVdgq9m");'>
-                    </div>
-                </div>
+    <div class="hidden lg:flex items-center gap-8">
+        
+        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+           href="home.view.php">home</a>
+
+        <a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary"
+           href="#">Wishlists</a>
+
+        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+           href="reservation.view.php">Trips</a>
+           
+        <a class="text-[#151413] text-sm font-semibold leading-normal hover:text-primary transition-colors"
+           href="profile.view.php">profile</a>
+
+    </div>
+</div>
             </header>
             <main class="flex-1 flex flex-col items-center">
                 <div class="w-full max-w-[1200px] px-6 lg:px-10 py-10">
